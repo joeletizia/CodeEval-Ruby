@@ -1,7 +1,7 @@
 require 'mathn'
 
 n = 1
-x = []
+x = Array.new
 until x.length == 1000
 	if n.prime?
 		x << n
