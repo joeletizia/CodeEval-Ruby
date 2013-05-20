@@ -34,5 +34,5 @@ module PrimeNumbers
 end
 
 # File.open(ARGV[0]).each_line do |line|
-#    puts PrimeNumbers.primes_less_than_n?(line.to_i).join ","
+#    puts PrimeNumbers.primes_less_than_n(line.to_i).join ","
 # end
