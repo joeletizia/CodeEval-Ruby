@@ -26,5 +26,19 @@ describe SortedList do
         SortedList.new(input).result.should == [1,2,3]
       end
     end
+
+    context "CodeEval examples" do
+      it "returns correct value" do
+        input = [1,1,1,2,2,3,3,4,4]
+        expected_result = [1,2,3,4]
+        SortedList.new(input).result.should == expected_result
+      end
+
+      it "returns the correct value againt" do
+        input = [2,3,4,5,5]
+        expected_result = [2,3,4,5]
+        SortedList.new(input).result.should == expected_result
+      end
+    end
   end
 end
