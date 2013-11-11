@@ -43,7 +43,7 @@ class Sudoku
   def check_boxes
     square_length = Math.sqrt(@key_space).to_i
 
-    if @key_space = 4
+    if @key_space == 4
       starting_positions = [0,2,8,10]
     else
       starting_positions = [0,3,6,27,30,33,54,57,60]
