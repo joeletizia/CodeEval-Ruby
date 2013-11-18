@@ -2,14 +2,14 @@ require 'spec_helper'
 require './number_pairs.rb'
 
 describe NumberPairsFinder do
-  describe "#find_pairs" do
-    let(:input_set) { [2,4,5,6,9,11,15] }
-    let(:result) { [[5,15],[9,11]] }
-    let(:sum) { 20 }
+  let(:numbers) { [1,2,3,4,6] }
+  let(:target) { 5 }
 
-    it "should return all pairs matching the sum" do
-      pair_finder = NumberPairsFinder.new(input_set, sum)
-      pair_finder.find_pairs.should == result
+  let(:finder) { NumberPairsFinder.new(numbers, target) }
+
+  describe "#find_pairs" do
+    it "returns the proper values" do
+      finder.find_pairs.should == [[1,4],[2,3]]
     end
   end
 end

@@ -8,19 +8,31 @@ class NumberPairsFinder
 
   def find_pairs
     pairs = []
-    count = 0
 
-    until @input_set.empty?
-      comparator = @input_set.delete_at(0)
-
-      @input_set.each_with_index do | value, index |
-        if comparator + value == @sum
-          pairs << [comparator, value]
+    @input_set.each_with_index do | value, index |
+      @input_set.each_with_index do |inner_value, inner_index|
+        next if inner_index == index
+        if inner_value + value == @sum
+          pairs << [value, inner_value] if check_uniqueness([inner_value, value], pairs)
         end
       end
     end
 
-    pairs
+    pairs.sort {|x,y| x.first <=> y.first }
   end
 
+  private
+
+  def check_uniqueness(pair, set)
+    set.each do | pair_to_check |
+      return false if unique_condition(pair, pair_to_check)
+    end
+
+    true
+  end
+
+  def unique_condition(pair1, pair2)
+    (pair1[0] == pair2[0] || pair1[1] == pair2[0]) && 
+      (pair1[1] == pair2[1] || pair1[0] == pair2[1])
+  end
 end
