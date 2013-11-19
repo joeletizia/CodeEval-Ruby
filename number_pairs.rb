@@ -1,5 +1,3 @@
-require 'pry'
-
 class NumberPairsFinder
   def initialize(input_set, sum)
     @input_set = input_set
@@ -32,7 +30,54 @@ class NumberPairsFinder
   end
 
   def unique_condition(pair1, pair2)
-    (pair1[0] == pair2[0] || pair1[1] == pair2[0]) && 
+    (pair1[0] == pair2[0] || pair1[1] == pair2[0]) &&
       (pair1[1] == pair2[1] || pair1[0] == pair2[1])
+  end
+end
+
+class InputDeconstructor
+  attr_accessor :set, :sum
+
+  def initialize(input)
+    data = input.split(";")
+    string_set = data[0].split(",") || []
+
+    @sum = data[1].to_i
+    @set = string_set.collect{ |x| x.to_i }
+  end
+end
+
+class OutputFormatter
+  attr_accessor :input
+
+  def initialize(input)
+    @input = input
+  end
+
+  def format
+    if input.empty?
+      "NULL"
+    else
+      output = ""
+      input.each do |pair|
+        output << "#{pair[0]},#{pair[1]};"
+      end
+
+      output.gsub(/;$/,'')
+    end
+  end
+end
+
+begin
+  File.open(ARGV[0]).each_line do |line|
+    input_deconstructor = InputDeconstructor.new(line)
+    set = input_deconstructor.set
+    sum = input_deconstructor.sum
+
+    pairs = NumberPairsFinder.new(set, sum).find_pairs
+
+    output = OutputFormatter.new(pairs).format
+
+    puts output
   end
 end
